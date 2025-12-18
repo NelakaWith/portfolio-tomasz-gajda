@@ -1,3 +1,94 @@
-<header class="h-5 w-5 bg-amber-500">
+---
+import logoIcon from "../assets/logo.svg?url";
+import hamburgerIcon from "../assets/hamburger.svg?url";
 
+const navLinks = [
+	{ label: "About Me", href: "#about" },
+	{ label: "Skills", href: "#skills" },
+	{ label: "Portfolio", href: "#portfolio" },
+	{ label: "Contact Me", href: "#contact" },
+];
+---
+
+<header class="fixed inset-x-0 top-0 z-50 bg-gray-900 shadow-[0_35px_120px_-45px_rgba(0,0,0,0.9)] backdrop-blur-md">
+	<input id="menu-toggle" type="checkbox" class="peer sr-only" />
+	<div class="relative mx-auto flex max-w-5xl items-center justify-between px-5 py-4">
+		<a class="flex items-center gap-3 text-xs uppercase tracking-[0.7em] text-white" href="/">
+			<div class="relative flex h-12 w-12 items-center justify-center">
+				<img
+					src={logoIcon}
+					alt="Tomasz Gajda logo"
+					class="h-10 w-10 transition-all duration-500 peer-checked:opacity-0 peer-checked:scale-90"
+				/>
+			</div>
+		</a>
+		<nav class="hidden items-center gap-8 text-[0.65rem] uppercase tracking-[0.3em] text-white/70 md:flex">
+			{navLinks.map((link) => (
+				<a class="transition hover:text-cyan-200" href={link.href}>
+					{link.label}
+				</a>
+			))}
+		</nav>
+		<label
+			for="menu-toggle"
+			class="cursor-pointer md:hidden"
+			aria-label="Open navigation"
+			role="button"
+		>
+			<img src={hamburgerIcon} alt="Menu" class="h-7 w-7" />
+		</label>
+	</div>
+
+	<div
+		data-mobile-menu
+		class="md:hidden pointer-events-none absolute inset-x-0 top-[4.7rem] z-40 max-h-0 overflow-hidden bg-black/70 text-white opacity-0 shadow-2xl transition-[max-height,opacity] duration-500 peer-checked:pointer-events-auto peer-checked:max-h-[32rem] peer-checked:opacity-100"
+	>
+		<div class="px-6 py-8">
+			<div class="mb-6 flex items-center justify-between text-xs uppercase tracking-[0.4em] text-white/60">
+				<span>Menu</span>
+				<label for="menu-toggle" class="cursor-pointer text-white/70 hover:text-white">
+					Close
+				</label>
+			</div>
+			<nav class="flex flex-col gap-5 text-lg uppercase tracking-[0.35em] text-white">
+				{navLinks.map((link) => (
+					<a
+						data-menu-link
+						href={link.href}
+						class="border-b border-white/15 pb-3 text-white transition-colors duration-300 hover:bg-white hover:text-black"
+					>
+						{link.label}
+					</a>
+				))}
+			</nav>
+			<div class="mt-8 border-t border-white/15 pt-4 text-sm uppercase tracking-[0.3em] text-slate-200">
+				<p>Scroll for the latest</p>
+			</div>
+		</div>
+	</div>
 </header>
+
+<script type="module" is:inline>
+	const toggle = document.getElementById("menu-toggle");
+	const menuPanel = document.querySelector("[data-mobile-menu]");
+	const headerEl = document.querySelector("header");
+	const updateState = () => {
+		if (!toggle || !menuPanel || !headerEl) return;
+		if (toggle.checked) {
+			menuPanel.dataset.state = "open";
+			headerEl.classList.add("menu-open");
+		} else {
+			menuPanel.dataset.state = "closed";
+			headerEl.classList.remove("menu-open");
+		}
+	};
+	const menuLinks = document.querySelectorAll("[data-menu-link]");
+	toggle?.addEventListener("change", updateState);
+	menuLinks.forEach((link) =>
+		link.addEventListener("click", () => {
+			toggle.checked = false;
+			updateState();
+		})
+	);
+	window.addEventListener("load", updateState);
+</script>
