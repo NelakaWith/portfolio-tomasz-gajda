@@ -1,3 +1,39 @@
-<section>
+---
+import emailIcon from "../assets/email.svg?url";
+import githubIcon from "../assets/github.svg?url";
+import linkedinIcon from "../assets/linkedin.svg?url";
+---
 
+<section class="h-screen bg-gray-800 relative">
+  <div
+    class="trapezoid absolute bottom-0 left-0 right-0 inset-0 bg-black/70 z-10 flex items-end"
+  >
+    <div class="font-bold text-white mx-8 mb-10 flex flex-col gap-1 flex-1">
+      <div class="text-xl">Hi, I am</div>
+      <div class="text-4xl">Tomasz Gajda</div>
+      <div class="text-xs">Front-end Developer / UI Designer</div>
+    </div>
+    <div class="flex flex-col mx-8 mb-10 gap-4 w-6">
+      <a href="mailto:your-email@example.com"
+        ><img src={emailIcon} alt="Email" class="w-6 h-6" /></a
+      >
+      <a href="https://github.com/yourusername"
+        ><img src={githubIcon} alt="GitHub" class="w-6 h-6" /></a
+      >
+      <a href="https://linkedin.com/in/yourprofile"
+        ><img src={linkedinIcon} alt="LinkedIn" class="w-6 h-6" /></a
+      >
+    </div>
+  </div>
+  <img
+    src="src/assets/bust.png"
+    alt="Hero Image"
+    class="w-full xs:w-sm xs:float absolute bottom-0 right-0"
+  />
 </section>
+
+<style>
+  .trapezoid {
+    clip-path: polygon(0 75%, 100% 65%, 100% 100%, 0% 100%);
+  }
+</style>
