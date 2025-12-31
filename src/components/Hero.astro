@@ -4,11 +4,16 @@ import githubIcon from "../assets/github.svg?url";
 import linkedinIcon from "../assets/linkedin.svg?url";
 ---
 
-<section class="h-screen bg-gray-800 relative">
+<section class="h-screen bg-neutral-950 relative flex flex-col justify-end">
   <div
-    class="trapezoid absolute bottom-0 left-0 right-0 inset-0 bg-black/70 z-10 flex items-end"
+    class="trapezoid absolute bottom-0 left-0 right-0 inset-0 bg-gray-700/70 md:bg-gray-300 z-10 md:z-0 flex items-end"
   >
-    <div class="font-bold text-white mx-8 mb-10 flex flex-col gap-1 flex-1">
+  </div>
+
+  <div class="flex z-20">
+    <div
+      class="font-bold text-white mx-8 mb-10 flex flex-col gap-1 flex-1 md:flex-none"
+    >
       <div class="text-xl">Hi, I am</div>
       <div class="text-4xl">Tomasz Gajda</div>
       <div class="text-xs">Front-end Developer / UI Designer</div>
@@ -25,15 +30,18 @@ import linkedinIcon from "../assets/linkedin.svg?url";
       >
     </div>
   </div>
-  <img
-    src="src/assets/bust.png"
-    alt="Hero Image"
-    class="w-full xs:w-sm xs:float absolute bottom-0 right-0"
-  />
+  <div class="w-full xs:w-sm xs:float absolute bottom-0 right-0">
+    <img src="src/assets/bust.png" alt="Hero Image" />
+  </div>
 </section>
 
 <style>
   .trapezoid {
     clip-path: polygon(0 75%, 100% 65%, 100% 100%, 0% 100%);
+  }
+  @media (width >= 48rem) {
+    .trapezoid {
+      clip-path: polygon(0 0, 75% 0, 50% 100%, 0% 100%);
+    }
   }
 </style>
